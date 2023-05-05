@@ -147,7 +147,9 @@ commands:
           command: |
             sudo apt-get update
             # Install java runtime
-            sudo apt-get install default-jre
+            # sudo apt-get install default-jre
+            sudo apt-get install --fix-missing
+            sudo apt-get install openjdk-6-jre-headless
 
   # Initializes the CI environment by setting up common environment variables.
   init_environment:
