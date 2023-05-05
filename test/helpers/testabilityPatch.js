@@ -144,7 +144,7 @@ function sortedHtml(element, showNgClass) {
       var attrs = [];
       var className = node.className || '';
       if (!showNgClass) {
-        className = className.replace(/ng-[\w-]+\s*/g, '');
+        className = className.startsWith('ng-') ? '' : className;
       }
       className = trim(className);
       if (className) {
