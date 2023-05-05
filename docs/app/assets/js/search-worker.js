@@ -39,7 +39,7 @@ searchDataRequest.send();
 // The worker receives a message everytime the web app wants to query the index
 self.onmessage = function(oEvent) {
   var q = oEvent.data.q;
-  var safeQ = escapeRegExp(q)
+  var safeQ = escapeRegExp(q);
   var hits = index.search(safeQ);
   var results = [];
   // Only return the array of paths to pages
