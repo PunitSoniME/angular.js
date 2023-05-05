@@ -6,6 +6,11 @@
 // Load up the lunr library
 importScripts('../components/lunr-0.7.2/lunr.min.js');
 
+// Escapes any special characters in a string to be used as a regular expression.
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 // Create the lunr index - the docs should be an array of object, each object containing
 // the path and search terms for a page
 var index = lunr(/** @this */function() {
@@ -34,7 +39,8 @@ searchDataRequest.send();
 // The worker receives a message everytime the web app wants to query the index
 self.onmessage = function(oEvent) {
   var q = oEvent.data.q;
-  var hits = index.search(q);
+  var safeQ = escapeRegExp(q)
+  var hits = index.search(safeQ);
   var results = [];
   // Only return the array of paths to pages
   hits.forEach(function(hit) {
