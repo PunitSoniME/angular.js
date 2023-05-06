@@ -811,10 +811,11 @@ describe('$compile', function() {
           function sortTag(text) {
             var parts, elementName;
 
-            parts = text
-              .replace('<', '')
-              .replace('>', '')
-              .split(' ');
+            var firstOpeningBracketIndex = text.indexOf("<");
+            var firstClosingBracketIndex = text.indexOf(">");
+            var result = text.substring(0, firstOpeningBracketIndex) + text.substring(firstOpeningBracketIndex + 1, firstClosingBracketIndex) + text.substring(firstClosingBracketIndex + 1);
+
+            parts = result.split(' ');
             elementName = parts.shift();
             parts.sort();
             parts.unshift(elementName);
